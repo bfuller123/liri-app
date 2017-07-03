@@ -11,8 +11,21 @@ var client = new twitter({
   access_token_secret: keys.twitterKeys.access_token_secret
 });
 
-client.get('statuses/user_timeline', twitterParams, function(error, tweets, response) {
-  if(!error){
-    console.log(tweets);
-  }
-});
+var command = process.argv[2];
+
+
+function getTweets() {
+  client.get('statuses/user_timeline', twitterParams, function(error, tweets, response) {
+    if(!error){
+      console.log(tweets);
+    }
+  });
+}
+
+switch (command) {
+  case "my-tweets":
+    getTweets();
+    break;
+  default:
+  console.log('That is not a command I know.');
+}
