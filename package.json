@@ -1,0 +1,24 @@
+{
+  "name": "liri-app",
+  "version": "1.0.0",
+  "description": "simple node app that allows users to search twitter, omdb, and spotify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfuller123/liri-app.git"
+  },
+  "author": "Brett Fuller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bfuller123/liri-app/issues"
+  },
+  "homepage": "https://github.com/bfuller123/liri-app#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.5",
+    "request": "^2.81.0",
+    "twitter": "^1.7.1"
+  }
+}
