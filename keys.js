@@ -15,8 +15,6 @@ exports.omdbKeys = {
 }
 
 exports.spotifyKeys = {
-  consumer_key: null,
-  consumer_secret: null,
-  access_token_key: null,
-  access_token_secret: null
+  id: 'f555c9aeabef4db997bbb296b2bf64fb',
+  secret: '9d0590e6145540458aa0672f8d00d033'
 }

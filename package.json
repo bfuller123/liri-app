@@ -18,6 +18,8 @@
   "homepage": "https://github.com/bfuller123/liri-app#readme",
   "dependencies": {
     "node-spotify-api": "^1.0.5",
+    "openurl": "^1.1.1",
+    "opn": "^5.1.0",
     "request": "^2.81.0",
     "twitter": "^1.7.1"
   }
