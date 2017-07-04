@@ -33,10 +33,34 @@ function spotifySearch(song) {
     if(err){
       return console.log('Error: '+ err);
     }
+    else if (data.tracks.items.length === 0) {
+      return playAceOfBase();
+    }
     for (var i in data.tracks.items) {
       getSpotifyInfo(data.tracks.items[i]);
     }
-  })
+  });
+}
+
+function playAceOfBase() {
+  //create new instance to spotify api so it can produce second search
+  var spotify = new Spotify({
+    id: keys.spotifyKeys.id,
+    secret: keys.spotifyKeys.secret
+  });
+  spotify.search({type: 'track', query: 'The Sign', limit: 20}, function(err, data) {
+    if(err){
+      return console.log('Error: '+ err);
+    }
+    for (var i in data.tracks.items) {
+      if (data.tracks.items[i].artists[0]["name"] == 'Ace of Base') {
+        //use return to ensure it plays just first instance of correct song
+        return getSpotifyInfo(data.tracks.items[i]);
+      } else {
+        continue;
+      }
+    }
+  });
 }
 
 function getSearchTerm() {
@@ -47,11 +71,12 @@ function getSearchTerm() {
 
 function getSpotifyInfo(object) {
   let url = object.preview_url;
-  console.log('artist: ' + object.artists[0]["name"]);
-  console.log('track: ' + object.name);
-  console.log('album: ' + object.album.name);
-  console.log('preview: ' + url);
-  open(url);
+  let songLink = 'https://open.spotify.com/track/'+object.id;
+  console.log('artist: ' + object.artists[0]["name"]+'\ntrack: ' + object.name+'\nalbum: ' + object.album.name);
+  if (url != null) {
+    console.log('preview: ' + url);
+    open(songLink);
+  }
   console.log("\n");
   return
 }
