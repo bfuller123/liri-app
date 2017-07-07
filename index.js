@@ -23,7 +23,14 @@ var command = process.argv[2];
 function getTweets() {
   client.get('statuses/user_timeline', twitterParams, function(error, tweets, response) {
     if(!error){
-      console.log(tweets);
+      for (var tweet in tweets) {
+        let user = tweets[tweet].user.name;
+        let tweetText = tweets[tweet].text;
+        let dateArr = tweets[tweet]['created_at'].split(' ');
+        let date = dateArr[1] + " " + dateArr[2] + " " + dateArr[5];
+        console.log("On " + date + " " + user + " said, '" + tweetText + "'");
+      }
+      // console.log(tweets);
     }
   });
 }
