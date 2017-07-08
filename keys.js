@@ -1,4 +1,4 @@
-console.log('this is loaded');
+console.log('\nfinding results...\n\n');
 
 exports.twitterKeys = {
   consumer_key: 'gRRdojaq2Qo3zNCz81grI3I5c',
@@ -8,10 +8,7 @@ exports.twitterKeys = {
 }
 
 exports.omdbKeys = {
-  consumer_key: null,
-  consumer_secret: null,
-  access_token_key: null,
-  access_token_secret: null
+  key: '&apikey=1d88979'
 }
 
 exports.spotifyKeys = {

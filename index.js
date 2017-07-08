@@ -70,9 +70,9 @@ function playAceOfBase() {
   });
 }
 
-function getSearchTerm() {
-  let searchTerm = process.argv.slice(3, process.argv.length);
-  searchTerm = searchTerm.join("+");
+function getSearchTerm(start, joiner) {
+  let searchTerm = process.argv.slice(start, process.argv.length);
+  searchTerm = searchTerm.join(joiner);
   return searchTerm
 }
 
@@ -88,14 +88,46 @@ function getSpotifyInfo(object) {
   return
 }
 
+function getMovies(movieName) {
+  var url = 'http://www.omdbapi.com/?t='+movieName+"&plot=full"+keys.omdbKeys.key
+  request(url,callBack);
+}
+
+function callBack(error, response, data) {
+  if(!error){
+    var dataParsed = JSON.parse(data);
+    if(dataParsed.Title != undefined){
+      console.log(dataParsed.Title+" came out in "+dataParsed.Year+".");
+      console.log("\nPlot: " + dataParsed.Plot);
+      console.log("\nProduced in: " + dataParsed.Country + "\nLanguage(s): "+dataParsed.Language+"\n");
+      if (dataParsed.Ratings.length > 0) {
+        for (var i in dataParsed.Ratings) {
+          if (dataParsed.Ratings[i].hasOwnProperty("Source")) {
+            console.log(dataParsed.Ratings[i].Source + ": " + dataParsed.Ratings[i].Value);
+          }
+        }
+      }
+    }
+    else {
+      console.log("Unable to find movie");
+    }
+    return
+  }
+  console.log(error);
+}
+
 switch (command) {
   case "my-tweets":
     getTweets();
     break;
-   case "spotify-this-song":
-     let songToSearch = getSearchTerm();
+  case "spotify-this-song":
+     let songToSearch = getSearchTerm(3, "+");
      spotifySearch(songToSearch);
      break;
+  case "movie-this":
+    let movieTitle = getSearchTerm(3, "+");
+    getMovies(movieTitle);
+    break;
   default:
   console.log('That is not a command I know.');
 }
